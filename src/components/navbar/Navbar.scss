@@ -1,0 +1,369 @@
+/* Suppression des styles mobile et burger menu */
+/* Navigation - Desktop First Design (from globals.css) */
+.main-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 0;
+  width: 100%;
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1000;
+  /* Prevent horizontal scroll issues */
+  overflow-x: hidden;
+}
+
+/* Scrolled state for navbar */
+.main-nav.scrolled {
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 20px 0;
+}
+
+/* Ensure body doesn't show horizontal scroll */
+body {
+  overflow-x: hidden;
+}
+
+.logo {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--text-primary);
+  font-family: var(--font-display);
+  letter-spacing: 2px;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  background: linear-gradient(135deg, #ffffff 0%, #f0f0ff 50%, #ffffff 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+  display: flex;
+  align-items: center;
+  height: 60px;
+  margin-top: 12px;
+  z-index: 1001;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 30px;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links li {
+  display: flex;
+  align-items: center;
+}
+
+.nav-links a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  font-family: var(--font-body);
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-links a::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.nav-links a:hover::before,
+.nav-links a.active::before {
+  left: 100%;
+}
+
+.nav-links a:hover, 
+.nav-links a.active {
+  color: var(--text-primary);
+  font-weight: 600;
+  text-shadow: 0 2px 8px rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-2px);
+}
+
+.nav-links a i {
+  font-size: 14px;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.nav-links a:hover i,
+.nav-links a.active i {
+  opacity: 1;
+}
+
+/* Register Button */
+.register-btn {
+  margin-left: 1.5rem;
+  padding: 0.55rem 2.2rem;
+  background: linear-gradient(90deg, #0a0b30 0%, #1e1c7c 60%, #2c1a5a 100%);
+  color: #fff;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 1.08rem;
+  text-decoration: none;
+  box-shadow: 0 0 16px 2px #1e1c7c88, 0 2px 16px 0 #2c1a5a88;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: none;
+  outline: none;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.register-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.register-btn:hover::before {
+  left: 100%;
+}
+
+.register-btn:hover {
+  box-shadow: 0 0 32px 6px #1e1c7ccc, 0 2px 24px 0 #2c1a5acc;
+  transform: scale(1.04);
+}
+
+.register-btn i {
+  font-size: 14px;
+}
+
+/* Additional fix for overflow issues */
+html {
+  overflow-x: hidden;
+}
+
+/* Container to prevent menu from showing */
+.main-nav-container {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .nav-links a {
+    border: none;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .main-nav,
+  .nav-links a {
+    transition: none;
+    animation: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-nav {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0;
+    position: relative;
+    background: transparent;
+    box-shadow: none;
+    z-index: 1000;
+  }
+  .mobile-nav-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100vw;
+    padding: 0.5rem 1rem;
+    background: transparent;
+    min-height: 56px;
+    z-index: 1001;
+  }
+  .mobile-logo {
+    display: flex;
+    align-items: center;
+    height: 36px;
+  }
+  .burger-menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 44px;
+    height: 44px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 1100;
+    position: relative;
+    transition: all 0.2s;
+    padding: 0;
+  }
+  .burger-bar {
+    width: 48px;
+    height: 4px;
+    background: #eaf6ff;
+    border-radius: 2px;
+    margin: 5px 0;
+    transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+    display: block;
+  }
+  .burger-menu.open .burger-bar:nth-child(1),
+  .burger-menu.open .burger-bar:nth-child(3) {
+    background: #fff;
+  }
+  .burger-menu.open .burger-bar:nth-child(2) {
+    opacity: 0;
+  }
+  .burger-menu.open .burger-bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+    background: #fff;
+  }
+  /* Close button in mobile menu */
+  .mobile-menu-close {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    width: 40px;
+    height: 40px;
+    background: none;
+    border: none;
+    color: #eaf6ff;
+    font-size: 2rem;
+    z-index: 1200;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background 0.2s;
+  }
+  .mobile-menu-close:hover, .mobile-menu-close:focus {
+    background: rgba(30,42,90,0.12);
+    color: #eaf6ff;
+    outline: 2px solid #eaf6ff;
+  }
+  .mobile-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(30, 42, 90, 0.98);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    z-index: 1050;
+    box-shadow: 0 8px 32px rgba(30, 28, 124, 0.25);
+    backdrop-filter: blur(8px);
+    padding-top: 48px;
+  }
+  .mobile-menu .mobile-menu-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 2.5rem;
+    margin-top: 0.5rem;
+  }
+  .mobile-menu .mobile-menu-logo img {
+    height: 48px;
+    width: auto;
+    display: block;
+  }
+  .mobile-nav-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1.2rem;
+    width: 100%;
+    max-width: 480px;
+  }
+  .mobile-nav-links li {
+    width: 100%;
+    text-align: left;
+  }
+  .mobile-nav-links a {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 1rem 2.5rem;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: #eaf6ff;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s, border 0.2s;
+    position: relative;
+    outline: none;
+    background: transparent;
+    border: 2px solid transparent;
+    box-sizing: border-box;
+  }
+  .mobile-nav-links a.active, .mobile-nav-links a:focus, .mobile-nav-links a:hover {
+    background: rgba(234,246,255,0.13);
+    color: #fff;
+    box-shadow: 0 2px 12px 0 rgba(234,246,255,0.10);
+    border: 2px solid #eaf6ff;
+  }
+  .mobile-nav-links a i {
+    font-size: 1.2em;
+    min-width: 22px;
+    text-align: center;
+    margin-right: 12px;
+    color: #eaf6ff;
+  }
+  .mobile-register-btn {
+    display: block;
+    width: 100%;
+    text-align: left;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #fff;
+    background: linear-gradient(90deg, #1e2a5a 0%, #2c3e7a 100%);
+    border-radius: 8px;
+    padding: 1rem 2.5rem;
+    margin-top: 2.5rem;
+    box-shadow: 0 0 16px 2px #1e1c7c55, 0 2px 16px 0 #2c1a5a55;
+    border: none;
+    outline: none;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .mobile-register-btn:focus, .mobile-register-btn:hover {
+    background: linear-gradient(90deg, #2c3e7a 0%, #1e2a5a 100%);
+    color: #eaf6ff;
+    box-shadow: 0 0 32px 6px #1e1c7ccc, 0 2px 24px 0 #2c1a5acc;
+  }
+}

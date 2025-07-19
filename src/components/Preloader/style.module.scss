@@ -1,0 +1,108 @@
+.introduction{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    z-index: 99999999999;
+    svg{
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: calc(100vh + 300px);
+        path{
+            fill: #1c1d20;
+        }
+    }
+    p{
+        display: flex;
+        color: white;
+        font-size: 42px;
+        align-items: center;
+        position: absolute;
+        z-index: 1;
+        letter-spacing: 0;
+        font-family: "Cormorant Garamond", serif;
+        font-style: normal;
+        font-weight: 500;
+        
+        span{
+            display: none;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+    }
+}
+
+.preloaderText {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 42px;
+  font-family: "Cormorant Garamond", serif;
+  font-style: normal;
+  font-weight: 500;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -60%);
+  z-index: 1;
+  letter-spacing: 0;
+  text-align: center;
+  flex-wrap: wrap;
+}
+.white {
+  color: #fff;
+}
+.red {
+  color: #B92031;
+}
+.legend {
+  color: #0094FF;
+  font-size: 28px;
+  font-family: "Cormorant Garamond", serif;
+  font-style: normal;
+  font-weight: 500;
+  position: absolute;
+  top: 58%;
+  left: 50%;
+  transform: translate(-50%, 0);
+  z-index: 1;
+  text-align: center;
+}
+
+.svg_curve {
+  width: 100vw !important;
+  height: calc(100vh + 300px) !important;
+  min-width: 0;
+  min-height: 0;
+  max-width: 100vw;
+  max-height: none;
+}
+
+@media (max-width: 900px) {
+  .preloaderText {
+    font-size: 28px;
+  }
+  .legend {
+    font-size: 18px;
+    top: 60%;
+  }
+}
+@media (max-width: 600px) {
+  .preloaderText {
+    font-size: 18px;
+    padding: 0 10px;
+  }
+  .legend {
+    font-size: 14px;
+    top: 62%;
+    padding: 0 10px;
+  }
+  .svg_curve {
+    height: calc(100vh + 150px) !important;
+  }
+}
