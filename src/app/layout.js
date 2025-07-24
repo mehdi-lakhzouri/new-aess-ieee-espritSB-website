@@ -1,6 +1,5 @@
 import "./globals.css";
 import { Montserrat } from 'next/font/google';
-import NightSkyBackground from '../components/background/NightSkyBackground';
 
 // Optimisation critique des polices pour LCP
 const montserrat = Montserrat({

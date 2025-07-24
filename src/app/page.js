@@ -1,13 +1,10 @@
 'use client';
 import { useEffect, useState, useRef } from 'react';
-import Typewriter from 'typewriter-effect';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 import dynamic from 'next/dynamic';
 const Preloader = dynamic(() => import('../components/Preloader'), { ssr: false });
 const NightSkyBackground = dynamic(() => import('../components/background/NightSkyBackground'), { ssr: false });
 import Navbar from '../components/navbar/Navbar';
-import Link from 'next/link';
-import { Sparkles, ArrowRight } from 'lucide-react';
 
 
 

@@ -21,32 +21,6 @@ interface Unit {
   color: string;
 }
 
-interface Star {
-  id: number;
-  x: number;
-  y: number;
-  size: number;
-  delay: number;
-  color: string;
-  opacity: number;
-  isGlowing: boolean;
-}
-
-interface ShootingStar {
-  id: number;
-  x: number;
-  y: number;
-  duration: number;
-}
-
-interface ColoredCircle {
-  id: number;
-  x: number;
-  y: number;
-  size: number;
-  opacity: number;
-  color: string;
-}
 
 export default function UnitsPage() {
   const [preloading, setPreloading] = useState(true);
@@ -54,92 +28,14 @@ export default function UnitsPage() {
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
   const units = useMemo(() => Object.entries(unitsData as Record<string, Unit>), []);
 
-  // Generate colored circles for background
   useEffect(() => {
-    const generateColoredCircles = () => {
-      const colors = {
-        darkBlue: '#0a0b30',
-        mediumBlue: '#141654',
-        brightBlue: '#1e1c7c',
-        purple: '#2c1a5a'
-      };
-      
-      const newCircles = [
-        { id: 0, x: -10, y: 50, size: 800, opacity: 0.8, color: colors.darkBlue },
-        { id: 1, x: 110, y: 50, size: 800, opacity: 0.8, color: colors.purple },
-        { id: 2, x: 50, y: 0, size: 700, opacity: 0.7, color: colors.mediumBlue },
-        { id: 3, x: 50, y: 100, size: 500, opacity: 0.7, color: colors.brightBlue },
-        { id: 4, x: 80, y: 25, size: 500, opacity: 0.2, color: colors.purple },
-        { id: 5, x: 20, y: 75, size: 500, opacity: 0.4, color: colors.mediumBlue }
-      ];
-      
-      // setColoredCircles(newCircles); // This state was removed
-    };
-    
-    generateColoredCircles();
-    
     setTimeout(() => {
       setPreloading(false);
       setTimeout(() => setLoadingComplete(true), 300);
     }, 2000);
   }, []);
 
-  // Generate stars
-  useEffect(() => {
-    const generateStars = () => {
-      const starCount = Math.min(200, Math.floor(window.innerWidth * window.innerHeight / 8000));
-      const newStars = [];
-      const starColors = ['#FDFDFD', '#b8beea', '#e2e8f0'];
-      const glowingStarsCount = Math.floor(starCount * 0.08);
-      
-      for (let i = 0; i < starCount; i++) {
-        const x = Math.random() * 100;
-        const y = Math.random() * 100;
-        const size = Math.random() * 2.5 + 0.8;
-        const delay = Math.random() * 6;
-        const color = starColors[Math.floor(Math.random() * starColors.length)];
-        const opacity = Math.random() * 0.7 + 0.3;
-        const isGlowing = i < glowingStarsCount;
-        
-        // newStars.push({ id: i, x, y, size, delay, color, opacity, isGlowing }); // This state was removed
-      }
-      
-      // setStars(newStars); // This state was removed
-    };
-    
-    generateStars();
-    
-    const handleResize = () => generateStars();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
-  // Create shooting stars
-  useEffect(() => {
-    let shootingStarId = 0;
-    
-    const createShootingStar = () => {
-      const x = Math.random() * 40;
-      const y = Math.random() * 25;
-      const duration = Math.random() * 3 + 2.5;
-      
-      // const newShootingStar = { id: shootingStarId++, x, y, duration }; // This state was removed
-      
-      // setShootingStars(prev => [...prev, newShootingStar]); // This state was removed
-      
-      setTimeout(() => {
-        // setShootingStars(prev => prev.filter(star => star.id !== newShootingStar.id)); // This state was removed
-      }, duration * 1000);
-    };
-    
-    createShootingStar();
-    
-    const interval = setInterval(() => {
-      createShootingStar();
-    }, Math.random() * 4000 + 4000);
-    
-    return () => clearInterval(interval);
-  }, []);
 
   // Intersection Observer for card animations
   useEffect(() => {

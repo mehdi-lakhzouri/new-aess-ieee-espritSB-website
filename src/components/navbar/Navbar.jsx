@@ -7,7 +7,7 @@ import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
 
-export default function Navbar() {
+export default function Navbar({ active }) {
   const pathname = usePathname();
   const [isMobile, setIsMobile] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -197,7 +197,7 @@ export default function Navbar() {
                       >
                         <Link
                           href={link.href}
-                          className={pathname === link.href ? 'active' : ''}
+                          className={(active ? active === link.label.toLowerCase() : pathname === link.href) ? 'active' : ''}
                           onClick={() => setMenuOpen(false)}
                         >
                           <motion.div 
@@ -209,7 +209,7 @@ export default function Navbar() {
                               <i className={link.icon} aria-hidden="true"></i>
                             </div>
                             <span className="link-text">{link.label}</span>
-                            {pathname === link.href && (
+                            {(active ? active === link.label.toLowerCase() : pathname === link.href) && (
                               <motion.div 
                                 className="active-indicator"
                                 layoutId="mobile-active-indicator"
@@ -276,25 +276,25 @@ export default function Navbar() {
       </div>
       <ul className="nav-links desktop-nav">
         <li>
-          <Link href="/" className={pathname === '/' ? 'active' : ''}>
+          <Link href="/" className={(active ? active === 'home' : pathname === '/') ? 'active' : ''}>
             <i className="fas fa-home"></i>
             Home
           </Link>
         </li>
         <li>
-          <Link href="/about_us" className={pathname === '/about_us' ? 'active' : ''}>
+          <Link href="/about_us" className={(active ? active === 'about us' : pathname === '/about_us') ? 'active' : ''}>
             <i className="fas fa-users"></i>
             About Us
           </Link>
         </li>
         <li>
-          <Link href="/events" className={pathname === '/events' ? 'active' : ''}>
+          <Link href="/events" className={(active ? active === 'events' : pathname === '/events') ? 'active' : ''}>
             <i className="fas fa-calendar-alt"></i>
             Events
           </Link>
         </li>
         <li>
-          <Link href="/units" className={pathname === '/units' ? 'active' : ''}>
+          <Link href="/units" className={(active ? active === 'units' : pathname === '/units') ? 'active' : ''}>
             <i className="fas fa-sitemap"></i>
             Units
           </Link>
