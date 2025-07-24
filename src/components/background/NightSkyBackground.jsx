@@ -34,7 +34,8 @@ export default function NightSkyBackground() {
       { color: '#013A63', opacity: 0.7, size: 900 * base, x: 10, y: 60 },
       { color: '#0288D1', opacity: 0.5, size: 700 * base, x: 80, y: 30 },
       { color: '#FFC107', opacity: 0.15, size: 600 * base, x: 50, y: 10 },
-      { color: '#025C99', opacity: 0.45, size: 900 * base, x: 55, y: 65 }, // Cercle plus visible pour clarté
+      { color: '#025C99', opacity: 0.45, size: 900 * base, x: 55, y: 65 },
+       // Cercle plus visible pour clarté
       { color: '#025C99', opacity: 0.3, size: 800 * base, x: 60, y: 80 },
       { color: '#FFFFFF', opacity: 0.08, size: 1000 * base, x: 50, y: 50 },
     ];
@@ -119,12 +120,6 @@ export default function NightSkyBackground() {
 
   // Ajout d'astronautes flottants
   const [floatingAstronauts, setFloatingAstronauts] = useState([
-    {
-      id: 'astro-1',
-      x: 12, // coin haut gauche
-      y: 18,
-      duration: 10
-    },
     {
       id: 'astro-2',
       x: 82, // coin bas droit

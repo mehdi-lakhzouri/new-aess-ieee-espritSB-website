@@ -190,13 +190,21 @@ export default function EventsPage() {
         <Navbar active="events" />
 
         {/* Events content */}
-        <section style={{ padding: '2rem', minHeight: '100vh', marginTop: '100px' }}>
+        <section style={{ 
+          padding: 'clamp(1rem, 4vw, 2rem)', 
+          minHeight: '100vh', 
+          marginTop: 'clamp(60px, 15vw, 100px)' 
+        }}>
           {/* Hero Section */}
           <motion.div 
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: loadingComplete ? 1 : 0, y: loadingComplete ? 0 : 50 }}
             transition={{ duration: 1, delay: 0.5 }}
-            style={{ textAlign: 'center', marginBottom: '5rem' }}
+            style={{ 
+              textAlign: 'center', 
+              marginBottom: 'clamp(3rem, 8vw, 5rem)',
+              padding: '0 clamp(1rem, 5vw, 2rem)'
+            }}
           >
             {/* Elegant Overline */}
             <motion.div
@@ -223,24 +231,28 @@ export default function EventsPage() {
             </motion.div>
 
             {/* Main Title with Sophisticated Typography */}
-            <h1 className="text-display" style={{ 
+            <h1 className="text-display events-main-title" style={{
               fontFamily: "'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
-              fontSize: 'clamp(2.5rem, 6vw, 3.5rem)',
+              fontSize: 'clamp(1.8rem, 8vw, 3.5rem)',
               color: '#ffffff',
               fontWeight: 800,
-              letterSpacing: '-0.02em',
-              lineHeight: '1.1',
+              letterSpacing: 'clamp(-0.03em, -0.5vw, -0.02em)',
+              lineHeight: 'clamp(1.0, 1.5vw, 1.1)',
               textAlign: 'center',
-              marginBottom: '1rem',
-              padding: '0 1rem',
+              marginBottom: 'clamp(0.75rem, 3vw, 1rem)',
+              padding: '0 clamp(0.5rem, 4vw, 1rem)',
               wordBreak: 'break-word',
               hyphens: 'auto',
+              overflowWrap: 'break-word',
+              maxWidth: '100%',
+              width: '100%',
               background: 'linear-gradient(135deg, #ffffff 0%, #e6e6ff 50%, #ffffff 100%)',
               backgroundClip: 'text',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               textShadow: '0 4px 20px rgba(255, 255, 255, 0.3)',
-              filter: 'drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3))'
+              filter: 'drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3))',
+              textRendering: 'optimizeLegibility'
             }}>
               Extraordinary Events
             </h1>
@@ -273,11 +285,11 @@ export default function EventsPage() {
               transition={{ duration: 0.8, delay: 1.1 }}
               style={{
                 display: 'flex',
-                gap: '2rem',
+                gap: 'clamp(1rem, 4vw, 2rem)',
                 justifyContent: 'center',
                 alignItems: 'center',
                 flexWrap: 'wrap',
-                marginTop: '2rem'
+                marginTop: 'clamp(1.5rem, 4vw, 2rem)'
               }}
             >
               {[
@@ -333,13 +345,18 @@ export default function EventsPage() {
               display: 'flex', 
               flexDirection: 'column', 
               alignItems: 'center', 
-              gap: '2.5rem', 
-              marginBottom: '4rem' 
+              gap: 'clamp(1.5rem, 5vw, 2.5rem)', 
+              marginBottom: 'clamp(2rem, 8vw, 4rem)',
+              padding: '0 clamp(1rem, 5vw, 2rem)'
             }}
           >
             {/* Premium Search Bar */}
             <motion.div 
-              style={{ position: 'relative', width: '100%', maxWidth: '600px' }}
+              style={{ 
+                position: 'relative', 
+                width: '100%', 
+                maxWidth: 'clamp(300px, 90vw, 600px)' 
+              }}
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.2 }}
             >
@@ -350,7 +367,7 @@ export default function EventsPage() {
                 onChange={(e) => setSearchTerm(e.target.value)}
                 style={{
                   width: '100%',
-                  padding: '1.25rem 4rem 1.25rem 1.5rem',
+                  padding: 'clamp(1rem, 3vw, 1.25rem) clamp(3rem, 8vw, 4rem) clamp(1rem, 3vw, 1.25rem) clamp(1rem, 3vw, 1.5rem)',
                   borderRadius: '2rem',
                   border: '2px solid rgba(255, 255, 255, 0.12)',
                   background: 'rgba(255, 255, 255, 0.08)',
@@ -599,8 +616,8 @@ export default function EventsPage() {
             id="events-cards-section"
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
-              gap: '2rem',
+              gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 320px), 1fr))',
+              gap: 'clamp(1.5rem, 4vw, 2rem)',
               marginBottom: '4rem'
             }}
           >
@@ -614,7 +631,7 @@ export default function EventsPage() {
                 style={{
                   background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05))',
                   borderRadius: '20px',
-                  padding: '2rem',
+                  padding: 'clamp(1.5rem, 4vw, 2rem)',
                   backdropFilter: 'blur(20px)',
                   border: '1px solid rgba(255, 255, 255, 0.2)',
                   position: 'relative',
@@ -623,7 +640,7 @@ export default function EventsPage() {
                   transition: 'all 0.4s ease',
                   display: 'flex',
                   flexDirection: 'column',
-                  minHeight: '480px',
+                  minHeight: 'clamp(400px, 50vh, 480px)',
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.boxShadow = '0 20px 40px rgba(63, 81, 181, 0.3)';

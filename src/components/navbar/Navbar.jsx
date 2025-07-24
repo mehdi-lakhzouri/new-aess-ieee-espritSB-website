@@ -5,6 +5,7 @@ import './Navbar.scss';
 import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
+import { X } from 'lucide-react';
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -25,83 +26,239 @@ export default function Navbar() {
     { href: '/units', label: 'Units', icon: 'fas fa-sitemap' },
   ];
 
+  // Animation variants pour le menu mobile
+  const mobileMenuVariants = {
+    hidden: { 
+      opacity: 0,
+      scale: 0.95,
+      y: -20,
+      transition: {
+        duration: 0.2,
+        ease: [0.4, 0, 0.2, 1]
+      }
+    },
+    visible: { 
+      opacity: 1,
+      scale: 1,
+      y: 0,
+      transition: {
+        duration: 0.3,
+        ease: [0.4, 0, 0.2, 1],
+        staggerChildren: 0.1,
+        delayChildren: 0.1
+      }
+    },
+    exit: {
+      opacity: 0,
+      scale: 0.95,
+      y: -20,
+      transition: {
+        duration: 0.2,
+        ease: [0.4, 0, 0.2, 1]
+      }
+    }
+  };
+
+  const menuItemVariants = {
+    hidden: { 
+      opacity: 0,
+      x: -30,
+      transition: {
+        duration: 0.2
+      }
+    },
+    visible: { 
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 0.3,
+        ease: [0.4, 0, 0.2, 1]
+      }
+    }
+  };
+
+  const backdropVariants = {
+    hidden: { opacity: 0 },
+    visible: { 
+      opacity: 1,
+      transition: {
+        duration: 0.2
+      }
+    },
+    exit: {
+      opacity: 0,
+      transition: {
+        duration: 0.2,
+        delay: 0.1
+      }
+    }
+  };
+
   if (isMobile) {
     return (
-      <nav className="main-nav mobile-nav" aria-label="Main navigation">
-        <div className="mobile-nav-header">
-          <div className="logo mobile-logo">
-            <Image 
-              src="/assets/logos/logo_w.png" 
-              alt="IEEE Logo" 
-              height={36} 
-              width={72} 
-              style={{ height: '36px', width: 'auto', display: 'block', objectFit: 'contain' }} 
-              priority
-            />
-          </div>
-          <button
-            className={`burger-menu${menuOpen ? ' open' : ''}`}
-            aria-label={menuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
-            aria-expanded={menuOpen}
-            onClick={() => setMenuOpen((open) => !open)}
-            tabIndex={0}
-          >
-            <span className="burger-bar" />
-            <span className="burger-bar" />
-            <span className="burger-bar" />
-          </button>
-        </div>
-        <AnimatePresence>
-          {menuOpen && (
-            <motion.div
-              className="mobile-menu"
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.25 }}
+      <>
+        <nav className="main-nav mobile-nav" aria-label="Main navigation">
+          <div className="mobile-nav-header">
+            <motion.div 
+              className="logo mobile-logo"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
             >
-              <button
-                className="mobile-menu-close"
-                aria-label="Fermer le menu"
-                onClick={() => setMenuOpen(false)}
-                tabIndex={0}
-              >
-                &#10005;
-              </button>
-              <div className="mobile-menu-logo">
-                <Image 
-                  src="/assets/logos/logo_w.png" 
-                  alt="IEEE Logo" 
-                  height={48} 
-                  width={96} 
-                  style={{ height: '48px', width: 'auto', display: 'block', objectFit: 'contain' }} 
-                  priority
-                />
-              </div>
-              <ul className="mobile-nav-links">
-                {navLinks.map(link => (
-                  <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      className={pathname === link.href ? 'active' : ''}
-                      onClick={() => setMenuOpen(false)}
-                    >
-                      <i className={link.icon} aria-hidden="true"></i>
-                      <span>{link.label}</span>
-                    </Link>
-                  </li>
-                ))}
-                <li>
-                  <Link href="#" className="register-btn mobile-register-btn" onClick={() => setMenuOpen(false)}>
-                    <i className="fas fa-user-plus" aria-hidden="true"></i>
-                    <span>Register now</span>
-                  </Link>
-                </li>
-              </ul>
+              <Image 
+                src="/assets/logos/logo_w.png" 
+                alt="IEEE Logo" 
+                height={40} 
+                width={80} 
+                style={{ height: '40px', width: 'auto', display: 'block', objectFit: 'contain' }} 
+                priority
+              />
             </motion.div>
+            
+            <motion.button
+              className={`burger-menu${menuOpen ? ' open' : ''}`}
+              aria-label={menuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
+              aria-expanded={menuOpen}
+              onClick={() => setMenuOpen((open) => !open)}
+              tabIndex={0}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <span className="burger-bar" />
+              <span className="burger-bar" />
+              <span className="burger-bar" />
+            </motion.button>
+          </div>
+        </nav>
+
+        {/* Menu Mobile Overlay */}
+        <AnimatePresence mode="wait">
+          {menuOpen && (
+            <>
+              {/* Backdrop */}
+              <motion.div
+                className="mobile-menu-backdrop"
+                variants={backdropVariants}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+                onClick={() => setMenuOpen(false)}
+              />
+              
+              {/* Menu Content */}
+              <motion.div
+                className="mobile-menu"
+                variants={mobileMenuVariants}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+              >
+                {/* Header avec logo et bouton fermer */}
+                <motion.div 
+                  className="mobile-menu-header"
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3, delay: 0.1 }}
+                >
+                  <div className="mobile-menu-logo">
+                    <Image 
+                      src="/assets/logos/logo_w.png" 
+                      alt="IEEE Logo" 
+                      height={48} 
+                      width={96} 
+                      style={{ height: '48px', width: 'auto', display: 'block', objectFit: 'contain' }} 
+                      priority
+                    />
+                  </div>
+                  
+                  <motion.button
+                    className="mobile-menu-close"
+                    aria-label="Fermer le menu"
+                    onClick={() => setMenuOpen(false)}
+                    tabIndex={0}
+                    whileHover={{ scale: 1.1, rotate: 90 }}
+                    whileTap={{ scale: 0.9 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <X size={24} strokeWidth={2} />
+                  </motion.button>
+                </motion.div>
+
+                {/* Navigation Links */}
+                <motion.div className="mobile-menu-content">
+                  <motion.ul className="mobile-nav-links">
+                    {navLinks.map((link, index) => (
+                      <motion.li 
+                        key={link.href}
+                        variants={menuItemVariants}
+                        custom={index}
+                      >
+                        <Link
+                          href={link.href}
+                          className={pathname === link.href ? 'active' : ''}
+                          onClick={() => setMenuOpen(false)}
+                        >
+                          <motion.div 
+                            className="link-content"
+                            whileHover={{ x: 8 }}
+                            transition={{ duration: 0.2 }}
+                          >
+                            <div className="link-icon">
+                              <i className={link.icon} aria-hidden="true"></i>
+                            </div>
+                            <span className="link-text">{link.label}</span>
+                            {pathname === link.href && (
+                              <motion.div 
+                                className="active-indicator"
+                                layoutId="mobile-active-indicator"
+                                transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                              />
+                            )}
+                          </motion.div>
+                        </Link>
+                      </motion.li>
+                    ))}
+                  </motion.ul>
+                  
+                  {/* Register Button */}
+                  <motion.div 
+                    className="mobile-menu-footer"
+                    variants={menuItemVariants}
+                  >
+                    <motion.div
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      <Link 
+                        href="#" 
+                        className="register-btn mobile-register-btn" 
+                        onClick={() => setMenuOpen(false)}
+                      >
+                        <i className="fas fa-user-plus" aria-hidden="true"></i>
+                        <span>Register now</span>
+                        <motion.div
+                          className="btn-shimmer"
+                          animate={{
+                            x: ['-100%', '100%']
+                          }}
+                          transition={{
+                            duration: 2,
+                            repeat: Infinity,
+                            repeatDelay: 3,
+                            ease: 'linear'
+                          }}
+                        />
+                      </Link>
+                    </motion.div>
+                  </motion.div>
+                </motion.div>
+              </motion.div>
+            </>
           )}
         </AnimatePresence>
-      </nav>
+      </>
     );
   }
 
